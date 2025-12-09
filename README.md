@@ -4,7 +4,8 @@ This project predicts whether a newspaper subscriber is likely to churn using a 
 The system is built using Django, and access to the prediction form is secured — only admin users can log in and predict churn.
 
 <img width="100%" alt="image" src="https://github.com/user-attachments/assets/c366d43d-10b1-4d51-b94c-713daa53b4e3" /> 
-<img width="50%" alt="image" src="https://github.com/user-attachments/assets/8ba5b2a3-696a-4932-9ddc-fadba08dae10" />
+
+<img width="100%" alt="image" src="https://github.com/user-attachments/assets/8ba5b2a3-696a-4932-9ddc-fadba08dae10" />
 
 
 🚀 How to Run This Project on Your Laptop
