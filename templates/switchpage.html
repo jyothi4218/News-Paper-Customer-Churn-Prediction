@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Switch Newspaper</title>
+  <style>
+    body {
+      background-color: #141414;
+      color: white;
+      font-family: 'Segoe UI', Tahoma,Geneva, Verdana, sans-serif;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 20%;
+      background-color: #1f1f1f;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    }
+
+    .sidebar h2 {
+      color: #e50914;
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 12px;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #2a2a2a;
+      transition: 0.3s;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #e50914;
+      color: white;
+    }
+
+    .main {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .form-box {
+      display: none;
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      background-color: #333;
+      color: white;
+      border: none;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #e50914;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 15px;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    button.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>Choose Newspaper</h2>
+  <ul id="paperList">
+    {% for key, paper in newspapers.items %}
+          {% if paper.name != 'Indian Express' %}  
+              <li onclick="selectPaper('{{ key }}', '{{ paper.name }}')">{{ paper.name }}</li>
+          {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="main">
+  <div class="form-box" id="switchForm">
+    <h2 id="selectedPaperTitle">Switch to:</h2>
+    <form method="POST" action="{% url 'conpro' %}">
+      {% csrf_token %}
+      <input type="hidden" name="selected_paper" id="selectedPaperInput" />
+      <label for="switch_reason">Reason for switching:</label><br><br>
+      <select name="switch_reason" id="reasonBox" required >
+            <option value="" disabled selected hidden>-- Select a reason --</option>
+            <option value="Too much political bias in current newspaper">Too much political bias in current newspaper</option>
+            <option value="More diverse news coverage in competitor">More diverse news coverage in competitor</option>
+            <option value="Current paper lacks regional news">Current paper lacks regional news</option>
+            <option value="Better editorial quality in switched paper">Better editorial quality in switched paper</option>
+            <option value="Too many ads in current paper">Too many ads in current paper</option>
+            <option value="Competitor offers better mobile app">Competitor offers better mobile app</option>
+            <option value="Poor customer support experience">Poor customer support experience</option>
+            <option value="Delayed delivery of current newspaper">Delayed delivery of current newspaper</option>
+            <option value="Switched due to attractive subscription offer">Switched due to attractive subscription offer</option>
+            <option value="Friend/family recommendation">Friend/family recommendation</option>
+            <option value="More engaging weekend supplements">More engaging weekend supplements</option>
+            <option value="Competitor provides better international coverage">Competitor provides better international coverage</option>
+            <option value="Sports coverage is lacking in current paper">Sports coverage is lacking in current paper</option>
+            <option value="Entertainment section is outdated">Entertainment section is outdated</option>
+            <option value="Current newspaper repeats content too often">Current newspaper repeats content too often</option>
+            <option value="More language editions available in switched paper">More language editions available in switched paper</option>
+            <option value="Local edition not available in current newspaper">Local edition not available in current newspaper</option>
+            <option value="Competitor provides more data journalism/infographics">Competitor provides more data journalism/infographics</option>
+            <option value="Better environment-focused news in competitor">Better environment-focused news in competitor</option>
+            <option value="Switched for better analysis and opinions">Switched for better analysis and opinions</option>
+            
+
+</select>
+      <button type="submit" id="confirmBtn" disabled>Confirm Switch</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('switchForm');
+  const reasonBox = document.getElementById('reasonBox');
+  const confirmBtn = document.getElementById('confirmBtn');
+  const selectedPaperInput = document.getElementById('selectedPaperInput');
+  const selectedPaperTitle = document.getElementById('selectedPaperTitle');
+
+  function selectPaper(key, name) {
+    form.style.display = 'block';
+    selectedPaperInput.value = key;
+    selectedPaperTitle.innerText = `Switch to: ${name}`;
+    reasonBox.value = '';
+    confirmBtn.disabled = true;
+    confirmBtn.classList.remove('enabled');
+  }
+
+reasonBox?.addEventListener('change', function () {
+  if (reasonBox.value.trim().length > 0) {
+    confirmBtn.disabled = false;
+    confirmBtn.classList.add('enabled');
+  } else {
+    confirmBtn.disabled = true;
+    confirmBtn.classList.remove('enabled');
+  }
+});
+</script>
+
+</body>
+</html>

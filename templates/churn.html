@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Churn Prediction</title>
+    <style>
+        body {
+            background-color: #141414;
+            color: #ffffff;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 50px;
+            margin: 0;
+        }
+
+        h1 {
+            color: #e50914;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background-color: #1f1f1f;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #333;
+            color: white;
+        }
+
+        button {
+            margin-top: 20px;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #b00610;
+        }
+
+        h2 {
+            color: #e50914;
+            margin-top: 30px;
+        }
+        .logout-container {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+
+        .logout-button {
+            background-color: #e50914;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #b00610;
+        }
+    </style>
+</head>
+<body>
+    <h1>Customer Churn Prediction</h1>
+    <div class="logout-container">
+    <a href="{% url 'login' %}" class="logout-button">Logout</a>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+                <label for="userSelect">Select User:</label>
+        <select id="userSelect">
+            <option value="">-- Select User --</option>
+            {% for profile in users %}
+                <option value="{{ profile.user.id }}">{{ profile.user.username }}</option>
+            {% endfor %}
+        </select>
+        
+                                
+         <label>Age:</label>
+    <input type="text" name="age" id="ageField" value="{{ age }}" readonly>
+
+    <label>Gender:</label>
+    <input type="text" name="gender" id="genderField" value="{{ gender }}" readonly>
+
+        <label>Subscription Type:</label>
+        <select name="subscription_type">
+            <option value="Quarterly">Quarterly</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Yearly">Yearly</option>
+            <option value="Half-Yearly">Half-Yearly</option>
+        </select><br>
+
+        <label>Tenure (months):</label>
+        <input type="text" name="tenure"><br>
+
+        <label>Daily Read Time:</label>
+        <input type="text" name="daily_read_time" step="0.1"><br>
+
+        <label>Active Days Per Week:</label>
+        <input type="text" name="active_days"><br>
+
+        <label>Satisfaction Score[1 - 10]:</label>
+        <input type="text" name="satisfaction"><br>
+
+        <label>No.Of Complaints</label>
+        <input type="text" name="complaints"><br>
+
+        <!-- <label>Reason for Switch:</label>
+        <input type="text" name="reason" id="reasonf" value="{{ reason }}" readonly><br> -->
+        
+        <button type="submit">Predict</button>
+    </form>
+
+   <script>
+document.getElementById("userSelect").addEventListener("change", function () {
+    const userId = this.value;
+    if (userId) {
+        fetch(`/get_user_details?selected_user=${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.age !== undefined && data.gender) {
+                    document.getElementById("ageField").value = data.age;
+                    document.getElementById("genderField").value = data.gender;
+                    // document.getElementById("reasonf").value = data.reason
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching user details:", error);
+            });
+    } else {
+        document.getElementById("ageField").value = "";
+        document.getElementById("genderField").value = "";
+        // document.getElementById("reasonf").value = "";
+    }
+});
+</script>
+
+    {% if prediction is not none %}
+        {% if prediction == 0 %}
+            <h2>Not Churn</h2>
+        {% else %}
+           <h2>Churn</h2>
+        {% endif %}
+    {% endif %}
+
+
+</body>
+</html>

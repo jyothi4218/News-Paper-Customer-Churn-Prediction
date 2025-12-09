@@ -1,0 +1,94 @@
+[
+  {
+    "name": "The Hindu",
+    "cost_per_month": 165,
+    "language": "English",
+    "categories": ["National", "Politics", "Editorial", "Business","international","sports","weekly sportstar","The business Line "],
+    "pros": [
+      "In-depth editorial content",
+      "Credible journalism",
+      "excellent for competitive  exams",
+     "Rich vocabulary and formal language",
+      "No sensationalism",
+      "balanced national and international coverage"
+    ],
+    "cons": [
+      "limited entertainment and pop culture coverage",
+      "perceived political bias",
+      "less visually engaging",
+      "limited free article policy online",
+      "minimal sports and youth content "
+    ]
+  },
+  {
+    "name": "Eenadu",
+    "cost_per_month": 215,
+    "language": "Telugu",
+    "categories": ["Regional", "Local News", "Crime", "Politics","sports","technology","health","business"],
+    "pros": [
+      "strong regional coverage",
+      "digital accessability",
+      "Good for State exam preparation(APPSC,TSPSC)",
+      "provide career guidance section ",
+      "provides former focused reporting"
+    ],
+    "cons": [
+      "limited national and international news",
+      "less investigative journalism",
+      "traditional layout and presentation",
+      "minimul focus on modern youth oriented topics"
+    ]
+  },
+ {
+    "name": "Andhra Jyothi",
+    "cost_per_month": 215,
+    "language": "Telugu",
+    "categories": ["polical","telugu cinema","local news","national news","panchamgam"],
+    "pros": [
+      "strong regional coverage",
+      "Broad digital and multimedia  presence",
+      "Bold and investigative journalism",
+      "independent and fearless",
+      "youth friendly layout and presentation"
+    ],
+    "cons": [
+      "Strong political bias",
+      "lack of depth in national and international coverage"
+
+    ]
+  },
+{
+    "name": "Sakshi",
+    "cost_per_month": 175,
+    "language": "Telugu",
+    "categories": ["political news","telugu cinema","local news","international news","life style","regional"],
+    "pros": [
+      "youth centric editorial strategy",
+      "Strong digital presence",
+      "provides job related information"
+    ],
+    "cons": [
+    "perceived political bias",
+    "limited national and international news",
+    "less investigative journalism",
+    "limited life style trends"
+          ]
+  },
+{
+    "name": "Indian Express",
+    "cost_per_month": 195,
+    "language": "english",
+    "categories": ["national news","international news","business","finance","matrimonial","recurment","property"],
+    "pros": [
+     "investigative journalism",
+     "balanced national and international news",
+     "suitable for serious readers",
+     "legal and policy reporting"
+    ],
+    "cons": [
+      "less focus on the entertainment and lifestyle",
+"higher reading difficulty",
+"smaller sunday supliments and magazines"
+    ]
+  }
+]
