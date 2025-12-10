@@ -18,7 +18,7 @@ Create a folder on your Desktop
 
 Open terminal inside that folder and run:
 
-git clone https://github.com/jyothi4218/News-Paper-Customer-Churn-Prediction.git
+git clone:  https://github.com/jyothi4218/News-Paper-Customer-Churn-Prediction.git
 cd News-Paper-Customer-Churn-Prediction
 
 2️⃣ Create a Virtual Environment (Windows)
